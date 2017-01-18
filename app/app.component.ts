@@ -26,7 +26,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
     <div class="row" *ngFor="let currentKeg of kegs">
-      <div class="col-sm-2 cell" >
+      <div class="col-sm-2 cell">
         <p>{{currentKeg.brand}}</p>
       </div>
       <div class="col-sm-2 cell" >
@@ -41,11 +41,14 @@ import { Component } from '@angular/core';
       <div class="col-sm-1 cell" >
         <p>{{currentKeg.alcoholContent}}</p>
       </div>
-      <div class="col-sm-3 cell" >
-        <p>{{currentKeg.pints}}</p>
+      <div class="col-sm-2 cell" >
+        <p [class]="priorityColor(currentKeg)">{{currentKeg.pints}}</p>
       </div>
       <div class="col-sm-1">
-        <button (click)="editKeg(currentKeg)">Edit</button>
+        <button class="btn btn-primary" (click)="sellPint(currentKeg)">Sell Pint</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-warning" (click)="editKeg(currentKeg)">Edit</button>
       </div>
     </div>
     <div *ngIf="selectedKeg">
@@ -86,9 +89,21 @@ export class AppComponent {
   editKeg(clickedKeg){
     this.selectedKeg = clickedKeg;
   }
+
+  sellPint(currentKeg){
+    currentKeg.pints -= 1;
+  }
+
+  priorityColor(currentKeg){
+    if(currentKeg.pints <= 10){
+      return "bg-danger";
+    } else if (currentKeg.pints <= 20) {
+      return "bg-warning";
+    }
+  }
 }
 
 export class Keg {
-  public pints: number = 124;
+  public pints: number = 21;
   constructor(public name: string, public brand: string, public style: string, public price: number, public alcoholContent: number){}
 }

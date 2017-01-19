@@ -48,7 +48,17 @@ import { Component } from '@angular/core';
         <button class="btn btn-primary" (click)="sellPint(currentKeg)">Sell Pint</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn btn-warning" (click)="editKeg(currentKeg)">Edit</button>
+      <a class="waves-effect waves-light btn" href="#modal1" (click)="editKeg(currentKeg)">
+Edit</a>
+      </div>
+    </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
       </div>
     </div>
     <div *ngIf="selectedKeg">
@@ -68,6 +78,7 @@ import { Component } from '@angular/core';
         <button class="btn" type="button" (click)="finishedEditing()">Done</button>
       </form>
     </div>
+
   </div>
   `
 })

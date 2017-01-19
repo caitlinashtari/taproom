@@ -1,6 +1,7 @@
 .cell {
   color: purple;
   border-left-style: solid;
+  height: 34px;
 }
 
 .heading {
@@ -11,4 +12,17 @@
 
 h1 {
   text-align: center;
+}
+
+.price{
+  font-weight: bold;
+  .cheap {
+    color: green;
+  }
+  .kinda-cheap {
+    color: orange;
+  }
+  .expensive {
+    color: red;
+  }
 }

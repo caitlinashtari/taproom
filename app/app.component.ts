@@ -6,23 +6,23 @@ import { Component } from '@angular/core';
   <div class="container">
     <h1 class="well">Tap Room</h1>
     <div class="row">
-      <div class="col-sm-2 heading">
-        <h3>Brewery</h3>
+      <div class="col s2 heading">
+        <h5>Brewery</h5>
       </div>
-      <div class="col-sm-2 heading">
-        <h3>Beer</h3>
+      <div class="col s2 heading">
+        <h5>Beer</h5>
       </div>
-      <div class="col-sm-2 heading">
-        <h3>Style</h3>
+      <div class="col s2 heading">
+        <h5>Style</h5>
       </div>
-      <div class="col-sm-1 heading">
-        <h3>Price</h3>
+      <div class="col s1 heading">
+        <h5>Price</h5>
       </div>
-      <div class="col-sm-1 heading">
-        <h3>ABV</h3>
+      <div class="col s1 heading">
+        <h5>ABV</h5>
       </div>
-      <div class="col-sm-4 heading">
-        <h3>Remaining Pints</h3>
+      <div class="col s4 heading">
+        <h5>Remaining Pints</h5>
       </div>
     </div>
     <div class="row" *ngFor="let currentKeg of kegs">
@@ -35,16 +35,16 @@ import { Component } from '@angular/core';
       <div class="col-sm-2 cell" >
         <p>{{currentKeg.style}}</p>
       </div>
-      <div class="col-sm-1 cell" >
-        <p>{{currentKeg.price}}</p>
+      <div class="col-sm-1 cell price" >
+        <p [class]=priceColor(currentKeg)>{{currentKeg.price | currency:'USD':true}}</p>
       </div>
       <div class="col-sm-1 cell" >
         <p>{{currentKeg.alcoholContent}}</p>
       </div>
-      <div class="col-sm-2 cell" >
+      <div class="col-sm-1 cell" >
         <p [class]="priorityColor(currentKeg)">{{currentKeg.pints}}</p>
       </div>
-      <div class="col-sm-1">
+      <div class="col-sm-2">
         <button class="btn btn-primary" (click)="sellPint(currentKeg)">Sell Pint</button>
       </div>
       <div class="col-sm-1">
@@ -52,7 +52,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
     <div *ngIf="selectedKeg">
-      <h3>Edit {{selectedKeg.name}}</h3>
+      <h5>Edit {{selectedKeg.name}}</h5>
       <form class="form-group">
         <label for="brand">Brewery</label>
         <input [(ngModel)]="selectedKeg.brand" class="form-control" name="brand">
@@ -65,7 +65,7 @@ import { Component } from '@angular/core';
         <label for="alcoholContent">ABV</label>
         <input [(ngModel)]="selectedKeg.alcoholContent" class="form-control" name="alcoholContent">
         <br>
-        <button type="button" (click)="finishedEditing()">Done</button>
+        <button class="btn" type="button" (click)="finishedEditing()">Done</button>
       </form>
     </div>
   </div>
@@ -99,6 +99,16 @@ export class AppComponent {
       return "bg-danger";
     } else if (currentKeg.pints <= 20) {
       return "bg-warning";
+    }
+  }
+
+  priceColor(currentKeg){
+    if(currentKeg.price < 5){
+      return "cheap";
+    } else if(currentKeg.price === 5){
+      return "kinda-cheap";
+    } else if(currentKeg.price > 5){
+      return "expensive";
     }
   }
 }
